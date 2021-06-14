@@ -1,0 +1,28 @@
+---
+title: "Lab_Rectangling"
+author: "Indali Bora"
+date: "6/14/2021"
+output: html_document
+---
+
+```{r}
+library(rvest)
+library(dplyr)
+library(tidyverse)
+library(repurrrsive)
+listviewer::jsonedit(gh_users)
+#1
+#1a) Nested lists are when a list is included within a list. For example, one of the elements of a list could be a another list. In this case, that would be considered a nested list.
+#1b) The data includes name, type, and value of data entries. Each entry is also grouped under a number and lists the names in an order.
+gh_repos
+#1c) The data becomes grouped within 6 rows of a list of 26 or 30 entries each (the individual data entries are not immediately listed). This is presented in a tibble form.
+repos <- tibble(repo = gh_repos)
+repos
+#1d) The listserver tool displays the information in formats such as a tree format where in an array, the data remains stored. Since there are lists within the larger array, this can be considered a nested list configuration. 30 represents the number of data value repository within the original list of 6 (for a Github user), and then 68 represents the number of specific data (i.e. name, owner, etc.) within each value that make up the 30 within one of the 6.  
+listviewer::jsonedit(gh_repos)
+#1e)
+tibble(repo = gh_repos)%>%
+  unnest_auto(repo)%>%
+  unnest_auto(repo) -> new
+new
+```
